@@ -14,7 +14,7 @@ import {
   X as CloseIcon,
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { InstagramIcon, FacebookIcon, TwitterIcon } from '@/components/ui/icons';
+import { InstagramIcon, FacebookIcon, TwitterIcon, YouTubeIcon } from '@/components/ui/icons';
 import { siteConfig } from '@/config/site';
 import { useCart } from '@/context/CartContext';
 
@@ -177,43 +177,63 @@ export function SiteHeader() {
             </span>
           </div>
 
-          {/* Right: Phone & Social Icons */}
-          <div className="flex items-center justify-end gap-4">
+          {/* Right: Phone & Clearly Mentioned Social Icons */}
+          <div className="flex items-center justify-end gap-3 sm:gap-4">
             <a
               href={`tel:${siteConfig.contact.phoneTel}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors font-medium"
+              className="flex items-center gap-1.5 hover:text-white transition-colors font-medium text-[#FAF7F2]"
             >
               <Phone className="size-3 text-[#C47935] shrink-0" />
-              <span>{siteConfig.contact.phoneDisplay}</span>
+              <span className="hidden sm:inline">{siteConfig.contact.phoneDisplay}</span>
             </a>
-            <div className="hidden sm:flex items-center gap-2 border-l border-[#33261E] pl-3 text-[#B8A898]">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="hover:text-white transition-colors"
-              >
-                <FacebookIcon width={12} height={12} />
-              </a>
-              <a
-                href="https://instagram.com/brewista.cafe"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="hover:text-white transition-colors"
-              >
-                <InstagramIcon width={12} height={12} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="hover:text-white transition-colors"
-              >
-                <TwitterIcon width={12} height={12} />
-              </a>
+
+            {/* Clearly Mentioned Social Media Section */}
+            <div className="flex items-center gap-2 border-l border-[#33261E] pl-2.5 sm:pl-3">
+              <span className="text-[10px] uppercase font-bold text-[#C47935] tracking-wider hidden sm:inline">
+                Follow Us:
+              </span>
+              <div className="flex items-center gap-1.5">
+                <a
+                  href="https://instagram.com/brewista.cafe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  title="Follow us on Instagram"
+                  className="flex size-6 items-center justify-center rounded-full bg-white/10 text-[#DDD0BC] hover:bg-[#E1306C] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                >
+                  <InstagramIcon width={13} height={13} />
+                </a>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  title="Follow us on Facebook"
+                  className="flex size-6 items-center justify-center rounded-full bg-white/10 text-[#DDD0BC] hover:bg-[#1877F2] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                >
+                  <FacebookIcon width={13} height={13} />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter / X"
+                  title="Follow us on X / Twitter"
+                  className="flex size-6 items-center justify-center rounded-full bg-white/10 text-[#DDD0BC] hover:bg-[#1DA1F2] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                >
+                  <TwitterIcon width={13} height={13} />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  title="Follow us on YouTube"
+                  className="flex size-6 items-center justify-center rounded-full bg-white/10 text-[#DDD0BC] hover:bg-[#FF0000] hover:text-white hover:scale-110 transition-all cursor-pointer"
+                >
+                  <YouTubeIcon width={13} height={13} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -325,7 +345,54 @@ export function SiteHeader() {
                   </Link>
                 );
               })}
-              <div className="pt-2 border-t border-[#E5DDD1] flex flex-col gap-2">
+              <div className="pt-3 border-t border-[#E5DDD1] flex flex-col gap-3">
+                <div className="flex items-center justify-between py-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#C47935]">
+                    Follow Us:
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="https://instagram.com/brewista.cafe"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Instagram"
+                      title="Follow us on Instagram"
+                      className="flex size-7 items-center justify-center rounded-full bg-[#1C1510] text-[#FAF7F2] hover:bg-[#E1306C] transition-all"
+                    >
+                      <InstagramIcon width={13} height={13} />
+                    </a>
+                    <a
+                      href="https://facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook"
+                      title="Follow us on Facebook"
+                      className="flex size-7 items-center justify-center rounded-full bg-[#1C1510] text-[#FAF7F2] hover:bg-[#1877F2] transition-all"
+                    >
+                      <FacebookIcon width={13} height={13} />
+                    </a>
+                    <a
+                      href="https://twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Twitter / X"
+                      title="Follow us on Twitter / X"
+                      className="flex size-7 items-center justify-center rounded-full bg-[#1C1510] text-[#FAF7F2] hover:bg-[#1DA1F2] transition-all"
+                    >
+                      <TwitterIcon width={13} height={13} />
+                    </a>
+                    <a
+                      href="https://youtube.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="YouTube"
+                      title="Follow us on YouTube"
+                      className="flex size-7 items-center justify-center rounded-full bg-[#1C1510] text-[#FAF7F2] hover:bg-[#FF0000] transition-all"
+                    >
+                      <YouTubeIcon width={13} height={13} />
+                    </a>
+                  </div>
+                </div>
                 <button
                   type="button"
                   onClick={() => {
