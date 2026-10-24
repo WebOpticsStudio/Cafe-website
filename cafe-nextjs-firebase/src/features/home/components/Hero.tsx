@@ -42,6 +42,7 @@ export function Hero() {
   return (
     <>
       <section
+        id="home"
         aria-labelledby="hero-heading"
         className="relative w-full overflow-hidden bg-[#FAF7F2] min-h-[calc(100vh-96px)] min-h-[calc(100dvh-96px)] flex flex-col justify-between"
       >

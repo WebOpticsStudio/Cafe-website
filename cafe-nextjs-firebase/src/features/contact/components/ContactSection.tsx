@@ -32,7 +32,7 @@ export function ContactSection({ hours }: ContactSectionProps) {
                   <h2 className="font-editorial text-base sm:text-lg font-bold text-[#1C1510] leading-none">
                     Opening Hours
                   </h2>
-                  <p className="text-[10px] text-[#6B5E52] mt-0.5">Freshly brewed daily in Brooklyn</p>
+                  <p className="text-[10px] text-[#6B5E52] mt-0.5">Freshly brewed daily in Marathahalli, Bengaluru</p>
                 </div>
               </div>
 
@@ -59,7 +59,7 @@ export function ContactSection({ hours }: ContactSectionProps) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 py-2.5 border-t border-[#E5DDD1]/70 text-[11px] text-[#6B5E52]">
               <div className="flex items-center gap-1.5 truncate">
                 <MapPin className="size-3.5 text-[#C47935] shrink-0" />
-                <span className="truncate">123 Coffee St, Brooklyn</span>
+                <span className="truncate">#123, 4th Cross, Marathahalli, Bengaluru</span>
               </div>
               <div className="flex items-center gap-1.5 truncate">
                 <Phone className="size-3.5 text-[#C47935] shrink-0" />

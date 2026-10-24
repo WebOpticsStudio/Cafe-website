@@ -19,7 +19,7 @@ export default async function SpecialsPage() {
     <>
       <PageHeader
         title="Chef & Barista Specials"
-        description="Handcrafted seasonal creations, small-batch roasts, and artisan pastries made fresh in Brooklyn every morning."
+        description="Handcrafted seasonal creations, small-batch roasts, and artisan pastries made fresh in Bengaluru every morning."
       />
       <div className="pb-16">
         <SpecialsSection items={menu.featured} />

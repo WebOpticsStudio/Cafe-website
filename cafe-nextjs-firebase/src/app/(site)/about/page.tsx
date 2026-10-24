@@ -7,7 +7,7 @@ import { Coffee, Award, Leaf, Flame, Heart, Clock, ArrowRight } from 'lucide-rea
 
 export const metadata: Metadata = {
   title: 'About Us | Brewista Coffee & Eatery',
-  description: 'Learn about our passion for freshly roasted coffee, honest food, and creating a warm neighborhood sanctuary in Brooklyn.',
+  description: 'Learn about our passion for freshly roasted coffee, honest food, and creating a warm neighborhood sanctuary in Marathahalli, Bengaluru.',
   alternates: { canonical: '/about' },
 };
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
               Brewista was born out of a desire for a different kind of coffeehouse: one that celebrates culinary craftsmanship without pretension, and where every guest is welcomed like family.
             </p>
             <p className="text-xs sm:text-sm text-[#6B5E52] leading-relaxed">
-              From our custom-designed espresso bar to our sunlit communal tables and handpicked reading selection, every corner of our Brooklyn space has been thoughtfully designed for comfort and creative inspiration.
+              From our custom-designed espresso bar to our sunlit communal tables and handpicked reading selection, every corner of our Bengaluru space has been thoughtfully designed for comfort and creative inspiration.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-3">
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 href="/visit"
                 className="inline-flex items-center gap-1.5 rounded-full border border-[#E5DDD1] bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#1C1510] hover:border-[#C47935] hover:text-[#C47935] transition-all"
               >
-                <span>Find Us in Brooklyn</span>
+                <span>Find Us in Bengaluru</span>
               </Link>
             </div>
           </div>

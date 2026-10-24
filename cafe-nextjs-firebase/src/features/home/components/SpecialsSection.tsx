@@ -104,14 +104,14 @@ export function SpecialsSection({ items }: SpecialsSectionProps) {
   };
 
   return (
-    <section id="specials" className="py-12 sm:py-16 bg-[#FAF7F2]">
+    <section id="specials" className="scroll-mt-16 pt-5 pb-12 sm:pt-6 sm:pb-16 bg-[#FAF7F2]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ── Centered Section Header ── */}
-        <div className="text-center mx-auto max-w-2xl mb-8 sm:mb-10">
+        <div className="text-center mx-auto max-w-2xl mb-5 sm:mb-6">
           <p className="font-editorial italic text-xs text-[#C47935] uppercase tracking-widest font-semibold">
             — Our Specials —
           </p>
-          <h2 className="mt-1.5 font-editorial text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C1510] tracking-tight">
+          <h2 className="mt-1 font-editorial text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C1510] tracking-tight">
             Handcrafted with <span className="italic font-normal text-[#C47935]">love</span>, Just for you.
           </h2>
         </div>

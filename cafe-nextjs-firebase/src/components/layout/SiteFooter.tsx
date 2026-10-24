@@ -96,7 +96,7 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="hover:text-[#C47935] transition-colors">
+                <Link href="/about" className="hover:text-[#C47935] transition-colors">
                   About Us
                 </Link>
               </li>
@@ -155,18 +155,18 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-xs text-[#DDD0BC]">
               <li className="flex items-start gap-2">
                 <MapPin className="size-3.5 shrink-0 text-[#C47935] mt-0.5" />
-                <span>123 Coffee Street, Brooklyn, NY 11201</span>
+                <span>#123, 2nd Main Road, 4th Cross, Marathahalli, Bengaluru, Karnataka 560037</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="size-3.5 shrink-0 text-[#C47935]" />
-                <a href="tel:+11234567890" className="hover:text-[#C47935] transition-colors">
-                  (123) 456-7890
+                <a href={`tel:${siteConfig.contact.phoneTel}`} className="hover:text-[#C47935] transition-colors">
+                  {siteConfig.contact.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="size-3.5 shrink-0 text-[#C47935]" />
-                <a href="mailto:hello@brewista.com" className="hover:text-[#C47935] transition-colors">
-                  hello@brewista.com
+                <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-[#C47935] transition-colors">
+                  {siteConfig.contact.email}
                 </a>
               </li>
             </ul>
@@ -223,7 +223,7 @@ export function SiteFooter() {
             </Link>
             <span>•</span>
             <span className="flex items-center gap-1 text-[#C47935]">
-              Crafted with <Heart className="size-2.5 fill-[#C47935]" /> in Brooklyn
+              Crafted with <Heart className="size-2.5 fill-[#C47935]" /> in Bengaluru
             </span>
           </div>
         </div>

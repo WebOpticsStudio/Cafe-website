@@ -50,7 +50,7 @@ export function CuratedGallery() {
   ];
 
   return (
-    <section id="gallery" className="py-10 sm:py-14 bg-[#FAF7F2]">
+    <section id="gallery" className="scroll-mt-20 py-10 sm:py-14 bg-[#FAF7F2]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header matching reference */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-1">

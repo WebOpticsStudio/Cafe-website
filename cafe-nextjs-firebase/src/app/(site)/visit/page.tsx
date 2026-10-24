@@ -8,7 +8,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Contact Us & Visit | Brewista Coffee & Eatery',
-  description: `Check opening hours or send an enquiry to ${siteConfig.name} in Brooklyn, NY.`,
+  description: `Check opening hours or send an enquiry to ${siteConfig.name} in Marathahalli, Bengaluru.`,
   alternates: { canonical: '/visit' },
 };
 

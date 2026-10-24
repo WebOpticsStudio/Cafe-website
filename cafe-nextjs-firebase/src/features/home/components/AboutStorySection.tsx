@@ -48,7 +48,7 @@ export function AboutStorySection() {
 
   return (
     <>
-      <section id="about" className="py-10 sm:py-14 bg-[#F4EFE6]">
+      <section id="about" className="scroll-mt-20 py-10 sm:py-14 bg-[#F4EFE6]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* ── 3-Column Storytelling Grid ── */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch">

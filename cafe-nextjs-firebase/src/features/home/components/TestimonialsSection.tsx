@@ -107,7 +107,7 @@ export function TestimonialsSection() {
                 Good Coffee Awaits You
               </h3>
               <p className="mt-1 text-xs text-[#DDD0BC]">
-                Visit us in Brooklyn for an unforgettable artisan coffee and culinary experience.
+                Visit us in Marathahalli, Bengaluru for an unforgettable artisan coffee and culinary experience.
               </p>
             </div>
 

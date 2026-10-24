@@ -73,17 +73,17 @@ export const siteConfig = siteConfigSchema.parse({
   // ── Contact & location ─────────────────────────────────────────────────────
   contact: {
     email: 'hello@brewista.com',
-    phoneDisplay: '(123) 456-7890',
-    phoneTel: '+11234567890',
+    phoneDisplay: '+91 98765 43210',
+    phoneTel: '+919876543210',
   },
   address: {
-    streetAddress: '123 Coffee Street',
-    locality: 'Brooklyn',
-    region: 'NY',
-    postalCode: '11201',
-    country: 'US',
+    streetAddress: '#123, 2nd Main Road, 4th Cross',
+    locality: 'Marathahalli',
+    region: 'Bengaluru, Karnataka',
+    postalCode: '560037',
+    country: 'IN',
   },
-  geo: { latitude: 40.6782, longitude: -73.9442 },
+  geo: { latitude: 12.9591, longitude: 77.6974 },
 
   // ── Hero ────────────────────────────────────────────────────────────────────
   hero: {
@@ -108,11 +108,11 @@ export const siteConfig = siteConfigSchema.parse({
   // ── Navigation ──────────────────────────────────────────────────────────────
   nav: [
     { label: 'Home', href: '/' },
+    { label: 'About Us', href: '/about' },
     { label: 'Menu', href: '/menu' },
-    { label: 'About Us', href: '/#about' },
     { label: 'Specials', href: '/#specials' },
-    { label: 'Gallery', href: '/#gallery' },
-    { label: 'Contact', href: '/visit' },
+    { label: 'Gallery', href: '/gallery' },
+    { label: 'Contact Us', href: '/visit' },
   ],
 });
 

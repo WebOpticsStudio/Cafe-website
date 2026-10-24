@@ -82,7 +82,7 @@ export default function GalleryPage() {
     <>
       <PageHeader
         title="Our Space & Stories"
-        description="A visual journey through our Brooklyn sanctuary — where passion for specialty coffee meets thoughtful, comforting food."
+        description="A visual journey through our Marathahalli sanctuary — where passion for specialty coffee meets thoughtful, comforting food."
       />
 
       <Container className="py-12">
@@ -129,7 +129,7 @@ export default function GalleryPage() {
               Experience the Ambiance in Person
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-[#DDD0BC] max-w-xl">
-              123 Coffee Street, Brooklyn, NY. Drop in for morning espresso or book a table for weekend brunch.
+              #123, 2nd Main Road, 4th Cross, Marathahalli, Bengaluru. Drop in for morning espresso or book a table for weekend brunch.
             </p>
           </div>
 

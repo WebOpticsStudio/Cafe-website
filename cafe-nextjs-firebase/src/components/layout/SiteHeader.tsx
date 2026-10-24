@@ -27,17 +27,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [reservationOpen, setReservationOpen] = useState(false);
-  const [currentHash, setCurrentHash] = useState('');
+  const [activeNav, setActiveNav] = useState<string>('Home');
   const { totalCount, setIsCartOpen } = useCart();
-
-  useEffect(() => {
-    const updateHash = () => {
-      setCurrentHash(typeof window !== 'undefined' ? window.location.hash : '');
-    };
-    updateHash();
-    window.addEventListener('hashchange', updateHash);
-    return () => window.removeEventListener('hashchange', updateHash);
-  }, [pathname]);
 
   // Strictly the requested 6 primary links
   const navLinks = [
@@ -49,26 +40,119 @@ export function SiteHeader() {
     { label: 'Contact Us', href: '/visit' },
   ];
 
+  // Synchronize active link based on current route pathname & hash
+  useEffect(() => {
+    const syncActiveNav = () => {
+      const hash = typeof window !== 'undefined' ? window.location.hash : '';
+      if (pathname === '/about') {
+        setActiveNav('About Us');
+      } else if (pathname === '/menu' || pathname.startsWith('/menu/')) {
+        setActiveNav('Menu');
+      } else if (pathname === '/visit' || pathname === '/contact') {
+        setActiveNav('Contact Us');
+      } else if (pathname === '/') {
+        if (hash === '#specials') {
+          setActiveNav('Specials');
+        } else if (hash === '#gallery') {
+          setActiveNav('Gallery');
+        } else if (hash === '#about') {
+          setActiveNav('About Us');
+        } else {
+          setActiveNav('Home');
+        }
+      }
+    };
+
+    syncActiveNav();
+    window.addEventListener('hashchange', syncActiveNav);
+    return () => window.removeEventListener('hashchange', syncActiveNav);
+  }, [pathname]);
+
+  // Handle incoming hash anchors when navigating from other pages to home
+  useEffect(() => {
+    if (pathname === '/' && typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash;
+      if (hash === '#specials') setActiveNav('Specials');
+      else if (hash === '#gallery') setActiveNav('Gallery');
+      else if (hash === '#about') setActiveNav('About Us');
+
+      const targetId = hash.replace('#', '');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        setTimeout(() => {
+          const headerHeight = 64;
+          const elementTop = targetEl.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: Math.max(0, elementTop - headerHeight),
+            behavior: 'smooth',
+          });
+        }, 120);
+      }
+    }
+  }, [pathname]);
+
+  // Scroll spy on home page to keep active indicator synchronized while scrolling
+  useEffect(() => {
+    if (pathname !== '/') return;
+
+    const sections = [
+      { id: 'specials', label: 'Specials' },
+      { id: 'about', label: 'About Us' },
+      { id: 'gallery', label: 'Gallery' },
+    ];
+
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        setActiveNav('Home');
+        return;
+      }
+
+      const scrollPosition = window.scrollY + 200;
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveNav(section.label);
+            return;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
+  // Single-click handler that immediately scrolls to section on home page flush under sticky navbar
+  const handleNavClick = (e: React.MouseEvent, link: { label: string; href: string }) => {
+    setActiveNav(link.label);
+
+    if (link.href.startsWith('/#')) {
+      const targetId = link.href.replace('/#', '');
+      if (pathname === '/') {
+        e.preventDefault();
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          const headerHeight = 64;
+          const elementTop = targetEl.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: Math.max(0, elementTop - headerHeight),
+            behavior: 'smooth',
+          });
+          window.history.pushState(null, '', `#${targetId}`);
+        }
+      }
+    } else if (link.href === '/' && pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState(null, '', '/');
+    }
+  };
+
   const isLinkActive = (link: { label: string; href: string }) => {
-    if (link.label === 'About Us') {
-      return pathname === '/about' || currentHash === '#about';
-    }
-    if (link.label === 'Menu') {
-      return pathname === '/menu' || pathname.startsWith('/menu/');
-    }
-    if (link.label === 'Contact Us') {
-      return pathname === '/visit' || pathname === '/contact';
-    }
-    if (link.label === 'Specials') {
-      return currentHash === '#specials';
-    }
-    if (link.label === 'Gallery') {
-      return currentHash === '#gallery';
-    }
-    if (link.label === 'Home') {
-      return pathname === '/' && !currentHash;
-    }
-    return pathname === link.href;
+    return activeNav === link.label;
   };
 
   return (
@@ -80,8 +164,8 @@ export function SiteHeader() {
           <div className="flex items-center justify-start">
             <span className="flex items-center gap-1.5 hover:text-white transition-colors">
               <MapPin className="size-3 text-[#C47935] shrink-0" />
-              <span className="hidden sm:inline">123 Coffee Street, Brooklyn, NY 11201</span>
-              <span className="sm:hidden">Brooklyn, NY</span>
+              <span className="hidden sm:inline">#123, 2nd Main, 4th Cross, Marathahalli, Bengaluru 560037</span>
+              <span className="sm:hidden">Marathahalli, Bengaluru</span>
             </span>
           </div>
 
@@ -96,11 +180,11 @@ export function SiteHeader() {
           {/* Right: Phone & Social Icons */}
           <div className="flex items-center justify-end gap-4">
             <a
-              href="tel:+11234567890"
+              href={`tel:${siteConfig.contact.phoneTel}`}
               className="flex items-center gap-1.5 hover:text-white transition-colors font-medium"
             >
               <Phone className="size-3 text-[#C47935] shrink-0" />
-              <span>(123) 456-7890</span>
+              <span>{siteConfig.contact.phoneDisplay}</span>
             </a>
             <div className="hidden sm:flex items-center gap-2 border-l border-[#33261E] pl-3 text-[#B8A898]">
               <a
@@ -161,13 +245,14 @@ export function SiteHeader() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`text-xs font-semibold tracking-wider transition-colors relative py-1 ${
+                  onClick={(e) => handleNavClick(e, link)}
+                  className={`text-xs font-semibold tracking-wider transition-colors relative py-1.5 ${
                     isActive ? 'text-[#C47935] font-bold' : 'text-[#1C1510] hover:text-[#C47935]'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C47935] rounded-full" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C47935] rounded-full transition-all" />
                   )}
                 </Link>
               );
@@ -225,12 +310,18 @@ export function SiteHeader() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-sm font-semibold tracking-wider transition-colors py-1 ${
+                    onClick={(e) => {
+                      handleNavClick(e, link);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`text-sm font-semibold tracking-wider transition-colors py-1.5 relative w-fit ${
                       isActive ? 'text-[#C47935] font-bold' : 'text-[#1C1510] hover:text-[#C47935]'
                     }`}
                   >
                     {link.label}
+                    {isActive && (
+                      <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C47935] rounded-full transition-all" />
+                    )}
                   </Link>
                 );
               })}
