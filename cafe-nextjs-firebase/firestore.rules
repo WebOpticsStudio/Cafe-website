@@ -1,0 +1,95 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Cafe website – Cloud Firestore security rules
+//
+// Model
+//   • Menu and settings are PUBLIC to read (they are shown on the public website).
+//   • Only users with the custom claim `admin == true` may write. The claim is set
+//     server-side with `npm run set-admin -- <email>` (Firebase Admin SDK).
+//   • Everything else is denied by default.
+//
+// The Next.js server reads/writes through the Admin SDK, which bypasses these rules.
+// The rules are the safety net for any direct browser access with the client SDK.
+// ─────────────────────────────────────────────────────────────────────────────
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    function isText(value, minLen, maxLen) {
+      return value is string && value.size() >= minLen && value.size() <= maxLen;
+    }
+
+    function isSlug(value) {
+      return isText(value, 1, 80) && value.matches('^[a-z0-9]+(-[a-z0-9]+)*$');
+    }
+
+    // ── Validators ───────────────────────────────────────────────────────────
+    function isValidCategory(data) {
+      return data.keys().hasOnly(['name', 'slug', 'description', 'sortOrder', 'isActive', 'updatedAt'])
+        && data.keys().hasAll(['name', 'slug', 'sortOrder', 'isActive'])
+        && isText(data.name, 1, 80)
+        && isSlug(data.slug)
+        && (!('description' in data) || isText(data.description, 0, 300))
+        && data.sortOrder is int
+        && data.isActive is bool
+        && (!('updatedAt' in data) || data.updatedAt is timestamp);
+    }
+
+    function isValidItem(data) {
+      return data.keys().hasOnly([
+          'categoryId', 'name', 'description', 'priceMinor', 'imageUrl', 'imagePath',
+          'dietaryTags', 'isAvailable', 'isFeatured', 'sortOrder', 'updatedAt'
+        ])
+        && data.keys().hasAll([
+          'categoryId', 'name', 'priceMinor', 'isAvailable', 'isFeatured', 'sortOrder'
+        ])
+        && isText(data.categoryId, 1, 128)
+        && isText(data.name, 1, 120)
+        && (!('description' in data) || isText(data.description, 0, 500))
+        && data.priceMinor is int
+        && data.priceMinor >= 0
+        && data.priceMinor <= 10000000
+        && (!('imageUrl' in data) || isText(data.imageUrl, 1, 2048))
+        && (!('imagePath' in data) || isText(data.imagePath, 1, 512))
+        && (!('dietaryTags' in data) || (data.dietaryTags is list && data.dietaryTags.size() <= 8))
+        && data.isAvailable is bool
+        && data.isFeatured is bool
+        && data.sortOrder is int
+        && (!('updatedAt' in data) || data.updatedAt is timestamp);
+    }
+
+    // ── Collections ──────────────────────────────────────────────────────────
+    match /menuCategories/{categoryId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidCategory(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /menuItems/{itemId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && isValidItem(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // settings/hours – weekly schedule, timezone and holiday exceptions.
+    // The structure is validated with Zod on the server before it is written.
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ── Default deny ─────────────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

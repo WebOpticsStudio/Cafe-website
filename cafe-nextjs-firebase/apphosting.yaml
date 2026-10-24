@@ -1,0 +1,60 @@
+# Firebase App Hosting configuration.
+# Docs: https://firebase.google.com/docs/app-hosting/configure
+#
+# • Non-secret values live here in plain text (they are committed to git).
+# • Secret values reference Cloud Secret Manager entries (create with
+#   `firebase apphosting:secrets:set <NAME>`), never plain text.
+# • NEXT_PUBLIC_* variables are inlined at build time, so they need BUILD availability.
+# • No Admin SDK credentials are needed: App Hosting provides Application Default
+#   Credentials to the running service automatically.
+
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 4
+  concurrency: 80
+
+env:
+  # ── Public values (REPLACE the placeholders) ───────────────────────────────
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: https://your-cafe-domain.example
+    availability: [BUILD, RUNTIME]
+
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: REPLACE_ME
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: your-project-id.firebaseapp.com
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: your-project-id
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: your-project-id.firebasestorage.app
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: REPLACE_ME
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: REPLACE_ME
+    availability: [BUILD, RUNTIME]
+
+  - variable: NEXT_PUBLIC_WHATSAPP_NUMBER
+    value: '15551234567'
+    availability: [BUILD, RUNTIME]
+  - variable: NEXT_PUBLIC_INSTAGRAM_HANDLE
+    value: your_cafe_handle
+    availability: [BUILD, RUNTIME]
+
+  # ── Secrets (Cloud Secret Manager) ─────────────────────────────────────────
+  # Uncomment after creating the secret; the key never appears in this repository.
+  # - variable: INSTAGRAM_ACCESS_TOKEN
+  #   secret: instagramAccessToken
+  #   availability: [RUNTIME]
+  #
+  # Google Maps Embed key: a public, referrer-restricted key. Set as a plain value
+  # (BUILD + RUNTIME) once restricted in Google Cloud Console.
+  # - variable: NEXT_PUBLIC_GOOGLE_MAPS_EMBED_API_KEY
+  #   value: REPLACE_ME
+  #   availability: [BUILD, RUNTIME]

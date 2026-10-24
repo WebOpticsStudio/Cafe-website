@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-label="A steaming cup of coffee on a saucer">
+  <style>
+    .steam { fill: none; stroke: #f6f7f3; stroke-width: 12; stroke-linecap: round; opacity: 0; transform-box: fill-box; animation: rise 4.5s ease-in-out infinite; }
+    .s2 { animation-delay: 1.5s; }
+    .s3 { animation-delay: 3s; }
+    @keyframes rise {
+      0%   { opacity: 0;   transform: translateY(18px); }
+      30%  { opacity: .85; }
+      100% { opacity: 0;   transform: translateY(-26px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .steam { animation: none; opacity: .7; } }
+  </style>
+  <circle cx="320" cy="340" r="268" fill="#f0a91e"/>
+  <circle cx="320" cy="340" r="300" fill="none" stroke="#f0a91e" stroke-opacity=".35" stroke-width="3"/>
+  <!-- saucer -->
+  <ellipse cx="320" cy="494" rx="200" ry="44" fill="#14201c" fill-opacity=".22"/>
+  <ellipse cx="320" cy="482" rx="200" ry="44" fill="#e8f0ec"/>
+  <ellipse cx="320" cy="476" rx="150" ry="28" fill="#cfe0d7"/>
+  <!-- handle -->
+  <path d="M440 332c64-6 74 78 6 86" fill="none" stroke="#f6f7f3" stroke-width="24" stroke-linecap="round"/>
+  <!-- cup -->
+  <path d="M196 308h248v52c0 74-52 116-124 116s-124-42-124-116v-52Z" fill="#f6f7f3"/>
+  <path d="M196 366h248" stroke="#1d4a3c" stroke-width="12"/>
+  <ellipse cx="320" cy="308" rx="124" ry="28" fill="#ffffff"/>
+  <ellipse cx="320" cy="310" rx="106" ry="20" fill="#4a2c1a"/>
+  <ellipse cx="300" cy="306" rx="46" ry="7" fill="#6b4029" fill-opacity=".8"/>
+  <!-- steam -->
+  <path class="steam" d="M274 262c-28-34 24-52-4-92"/>
+  <path class="steam s2" d="M322 258c-28-34 24-52-4-92"/>
+  <path class="steam s3" d="M370 262c-28-34 24-52-4-92"/>
+</svg>

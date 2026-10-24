@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+
+/*
+ * Design Tokens — Inspired by Brewista Coffee & Eatery
+ * Palette: Rich Espresso Brown, Creamy Ivory, Warm Caramel, and Muted Beige.
+ */
+@theme {
+  --color-canvas: #FAF7F2;
+  --color-surface: #FFFFFF;
+  --color-ink: #1C1510;
+  --color-muted: #6B5E52;
+  --color-line: #E5DDD1;
+
+  /* Warm Espresso Palette */
+  --color-espresso-950: #120D0A;
+  --color-espresso-900: #1C1510;
+  --color-espresso-850: #261D17;
+  --color-espresso-800: #33261E;
+  --color-espresso-700: #4A382C;
+  --color-espresso-600: #664E3D;
+
+  /* Warm Cream & Beige Palette */
+  --color-cream-50: #FCFAF7;
+  --color-cream-100: #FAF7F2;
+  --color-cream-200: #F4EFE6;
+  --color-cream-300: #EBE2D3;
+  --color-cream-400: #DDD0BC;
+
+  /* Rich Caramel & Warm Amber Palette */
+  --color-caramel-200: #F3C498;
+  --color-caramel-300: #E6A265;
+  --color-caramel-400: #D88B44;
+  --color-caramel-500: #C47935;
+  --color-caramel-600: #AC6426;
+
+  /* Backward-compatible forest/marigold mappings */
+  --color-forest-50: #F4EFE6;
+  --color-forest-100: #EBE2D3;
+  --color-forest-600: #4A382C;
+  --color-forest-700: #261D17;
+  --color-forest-800: #1C1510;
+
+  --color-marigold-300: #E6A265;
+  --color-marigold-400: #D88B44;
+  --color-marigold-500: #C47935;
+
+  --color-danger: #A4262C;
+}
+
+@theme inline {
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, Cambria, var(--font-bricolage), serif;
+  --font-sans: var(--font-jakarta), var(--font-instrument), system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible keyboard focus everywhere; flips to caramel on dark surfaces. */
+  :focus-visible {
+    outline: 2px solid var(--color-caramel-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  [data-surface='dark'] :focus-visible,
+  [data-surface='dark']:focus-visible {
+    outline-color: var(--color-caramel-400);
+  }
+
+  /* Respect users who ask for less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Custom aesthetic utility styles */
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.text-caramel {
+  color: var(--color-caramel-500);
+}
+
+.bg-espresso {
+  background-color: var(--color-espresso-900);
+}
+
+.bg-warm-ivory {
+  background-color: #FAF7F2;
+}
+
+.border-warm {
+  border-color: #E5DDD1;
+}
